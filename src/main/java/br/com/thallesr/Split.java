@@ -21,12 +21,12 @@ public class Split {
         Arrays.sort(memorySpace);
 
         String fileOutput = "out1.data";
-        DataOutputStream file1 = new DataOutputStream(new FileOutputStream(fileOutput));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileOutput));
         for (int value : memorySpace) {
-            file1.writeInt(value);
+            bos.write(ByteBuffer.allocate(4).putInt(value).array());
         }
-        file1.flush();
-        file1.close();
+        bos.flush();
+        bos.close();
 
 
     }
