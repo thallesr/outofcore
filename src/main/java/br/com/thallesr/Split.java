@@ -8,9 +8,11 @@ import java.util.Random;
 
 public class Split {
     public static void main(String[] args) throws IOException {
+        long milis = System.currentTimeMillis();
         try {
             String filename = args[0];
             String fileSizeStringKB = args[1];
+            System.out.println();
             Integer fileSizeKB = Integer.valueOf(fileSizeStringKB);
             int[] memorySpace = new int[fileSizeKB * 256]; //    fileSizeKB * 1024 /4
 
@@ -18,9 +20,13 @@ public class Split {
             for (int i = 0; i < fileSizeKB / 4; i++) {
                 memorySpace[i] = file.readInt();
             }
+            System.out.println("Load Time: "+ (System.currentTimeMillis() - milis)+"ms");
+            milis = System.currentTimeMillis();
             file.close();
             Arrays.sort(memorySpace);
 
+            System.out.println("Sort Time: "+ (System.currentTimeMillis() - milis)+"ms");
+            milis = System.currentTimeMillis();
             String fileOutput = "out1.data";
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileOutput));
             for (int value : memorySpace) {
@@ -28,6 +34,8 @@ public class Split {
             }
             bos.flush();
             bos.close();
+
+            System.out.println("Write Time: "+ (System.currentTimeMillis() - milis)+"ms");
         }
         catch (Exception e ){
             e.printStackTrace();

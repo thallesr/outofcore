@@ -18,7 +18,7 @@ public class Populate {
         byte[] barray = new byte[1024];
         ByteBuffer b = ByteBuffer.wrap(barray);
         RandomAccessFile file;
-        file = new RandomAccessFile(fileName, "w");
+        file = new RandomAccessFile(fileName, "rw");
         FileChannel channel = file.getChannel();
         Random r = new Random();
         for (int s = 0; s < KBs; s++) {
